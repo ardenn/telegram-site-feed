@@ -49,4 +49,5 @@
 # Ignore all local history of files
 .history
 
+app.py
 # End of https://www.gitignore.io/api/go,linux,visualstudiocode
