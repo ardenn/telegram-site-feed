@@ -11,13 +11,6 @@ RUN apk update && apk add --no-cache git ca-certificates tzdata && update-ca-cer
 ENV USER=appuser
 ENV UID=10001
 
-# Set env variables
-ARG CHAT_ID
-ARG API_KEY
-ENV CHAT_ID=${CHAT_ID} API_KEY=${API_KEY}
-
-
-
 # See https://stackoverflow.com/a/55757473/12429735RUN 
 RUN adduser \    
     --disabled-password \    
@@ -40,6 +33,7 @@ RUN go mod verify
 # Optimize the binary, by removing debug information and
 # compiling only for linux target and
 # disabling cross compilation.
+ENV CGO_ENABLED=0
 RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/sitebot
 
 ############################
